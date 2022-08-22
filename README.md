@@ -1,7 +1,5 @@
 ## Domain Checker
 
-
-## Documentation Domain Checker
 Domain Checker est une plateforme web permettant de vérifier la protection des noms de domaines suivant certains protocoles. Il existe plusieurs protocoles, mais cette plateforme s’intéresse aux plus importants que sont le DMARC, le SPF et le DKIM.
 
 ### I)	Définition des protocoles
