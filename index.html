@@ -7,7 +7,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/fontawesome.min.css" integrity="sha384-zIaWifL2YFF1qaDiAo0JFgsmasocJ/rqu7LKYH8CoBEXqGbb9eO+Xi3s6fQhgFWM" crossorigin="anonymous">
-    <link rel="stylesheet" href="dmarc.css">
+    <link rel="stylesheet" href="domaine.css">
     <script src="Dmarc.js" defer></script>
     <title>Projet DMARC</title>
   </head>
@@ -22,7 +22,7 @@
           <div class="form-group">
             <!--Label pour entrer le nom de domaine-->
             <label for="domainName">Domain</label>
-            <center><input type="text" class="form-control" id="domainNAme" placeholder="Enter your domain name"></center>
+            <center><input type="text" class="form-control" id="domainNAme" placeholder="Enter your domain name" onkeypress="if (event.keyCode == 13) process();"></center>
           </div>
           <!--Boutton d'envoie du nom de domaine-->
           <button type="button" class="btn btn-primary" id="buttonHidden" onclick="process();" >Scan now </button>
@@ -36,8 +36,8 @@
             <!--Colonne pour enregistrement DMARC-->
               <div class="col" id="_col">
                 <div class="row justify-content-md-center">
-                  <div class="col" id="col11">1</div>
-                  <div class="col"id="col12">2</div>
+                  <div class="col" id="col11">-</div>
+                  <div class="col"id="col12">-</div>
                 </div>
                 <div class="row"><br/><h2>DMARC</h2>
                   <br/>Authentification, rapport et conformité des messages basés sur le domaine
@@ -46,8 +46,8 @@
               <!--Colonne pour l'enregistrement SPF-->
               <div class="col" id="_col">
                 <div class="row justify-content-md-center">
-                  <div class="col" id="col21">1</div>
-                  <div class="col" id="col22">2</div>
+                  <div class="col" id="col21">-</div>
+                  <div class="col" id="col22">-</div>
                 </div>
                 <div class="row"><br/><h2>SPF</h2>
                   <br/> Cadre de stratégie de l'expéditeur
@@ -56,8 +56,8 @@
               <!--Colonne pour l'enregistrement DKIM-->
               <div class="col" id="_col">
                 <div class="row justify-content-md-center">
-                  <div class="col" id="col31">1</div>
-                  <div class="col" id="col32">2</div>
+                  <div class="col" id="col31">-</div>
+                  <div class="col" id="col32">-</div>
                 </div>
                 <div class="row" id="protocol"><br/><h2>DKIM</h2>
                   <br/>Courrier identifié par DomainKeys
@@ -66,15 +66,19 @@
                <!--Colonne pour le protocole HTTPS -->
               <div class="col" id="_col">
                 <div class="row justify-content-md-center">
-                  <div class="col" id="col41">1</div>
-                  <div class="col"id="col42">2</div>
+                  <div class="col" id="col41">-</div>
+                  <div class="col"id="col42">-</div>
                 </div>
                 <div class="row"><br/><h2>HTTPS</h2>
                   <br/>HyperText Transfer Protocol Secure
                 </div>
               </div>
-              <div class="col" id="_col">Resultat global
-                <div class="row justify-content-md-center">Increase score</div>
+              <div class="col" id="_col">Score global
+                <center><div class="score" id="button1"></div>
+                <div class="score"id="button2"></div>
+                <div class="score" id="button3"></div>
+                <div class="score"id="button4"></div>
+                <div class="row justify-content-md-center"id="score"></div></center>
               </div>
           </div>
       </div>

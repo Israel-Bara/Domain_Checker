@@ -22,9 +22,12 @@ function getXMLHttpRequest() {
 var xhr=getXMLHttpRequest();
 /*Fonction appelé lorsque l'utilisateur clic sur le boutton scan pour envoyer le nom de domaine*/
 function process(){
+   document.getElementById("gif").innerHTML="<img src='image/patiente.gif'/>";
+   document.getElementById("buttonHidden").style.visibility="hidden";
+   document.getElementById("gif").style.visibility="visible";
    if(xhr.readyState<4 && xhr.status!=200){
-      document.getElementById("gif").innerHTML="<img src='image/patiente.gif'/>";
-      document.getElementById("buttonHidden").style.visibility="hidden";
+      //document.getElementById("gif").innerHTML="<img src='image/patiente.gif'/>";
+      //document.getElementById("buttonHidden").style.visibility="hidden";
    }
    if(xhr.readyState==0 || xhr.readyState==4){
         /*Recuperation de la valeur du nom de domaine*/
@@ -41,12 +44,13 @@ else{
    setTimeout('process()',1000);
 }
 }
+
 /*Definition de la fonction de recuperation de donnees du serveur*/
 function handleResponse(){
    /*Si le serveur est pret a communiquer*/
    if(xhr.readyState==4 && xhr.status==200){
          document.getElementById("buttonHidden").style.visibility="visible";
-         document.getElementById("gif").style.display="none";
+         document.getElementById("gif").style.visibility="hidden";
          /*Recuperation des donnees du serveur avec responseText*/
          responseType=JSON;
          reponse=xhr.responseText;
@@ -88,6 +92,10 @@ function handleResponse(){
             document.getElementById("recordSpf").innerHTML="";
             document.getElementById("recordDmarc").innerHTML="";
             document.getElementById("recordDKIM").innerHTML="";
+            document.getElementById("button1").style.backgroundColor="rgb(250, 250, 254)";
+            document.getElementById("button2").style.backgroundColor="rgb(250, 250, 254)";
+            document.getElementById("button3").style.backgroundColor="rgb(250, 250, 254)";
+            document.getElementById("button4").style.backgroundColor="rgb(250, 250, 254)";
          }
          else{
             /*Recuperation des enregistrement dmarc, spf,dkim et le dns dans des variable*/
@@ -101,9 +109,9 @@ function handleResponse(){
                 document.getElementById("enterDomaine").innerHTML="Entrez un nom de domaine valide";
                 document.getElementById("domainNAme").style.borderColor="red";
                 document.getElementById("enterDomaine").style.color="red";
-                document.getElementById("codeDMARC").value="Le nom de domaine entré est invalide";
-                document.getElementById("codeSPF").value="Le nom de domaine entré est invalide";
-                document.getElementById("codeHTTPS").value="Le nom de domaine entré est invalide";
+                document.getElementById("codeDMARC").value="Le nom de domaine entré n'existe pas";
+                document.getElementById("codeSPF").value="Le nom de domaine entré n'existe pas";
+                document.getElementById("codeHTTPS").value="Le nom de domaine entré n'existe pas";
                 document.getElementById("codeSPF").style.color="red";
                 document.getElementById("codeDMARC").style.color="red";
                 document.getElementById("codeHTTPS").style.color="red";
@@ -135,10 +143,15 @@ function handleResponse(){
                 document.getElementById("texteDmarc").style.color="black";
                 document.getElementById("texteHTTPS").style.color="black";
                 document.getElementById("texteDKIM").style.color="black";
+                document.getElementById("button1").style.backgroundColor="rgb(250, 250, 254)";
+                document.getElementById("button2").style.backgroundColor="rgb(250, 250, 254)";
+                document.getElementById("button3").style.backgroundColor="rgb(250, 250, 254)";
+                document.getElementById("button4").style.backgroundColor="rgb(250, 250, 254)";
                }
              else{
                /*Si le nom de domaine est valide, algorithme pour recuperer la valeur des enregistrements
                  spf,dmarc,dkim, qui sont au milieu d'un longue chaine de caractere*/
+                 var score=0;
                 spf=spf.substring(spf.lastIndexOf('"v=spf'));
                 dmarc=dmarc.substring(dmarc.lastIndexOf('"v=DMARC'));
                 /*Action a realiser si le nom de domaine est valide et ne dispose pas d'enregistrement dmarc*/
@@ -160,6 +173,7 @@ function handleResponse(){
                   /*Action a realiser si le nom de domaine est valide et dispose d'un enregistrement dmarc, 
                    on recupere la valeur et on envoie sur la page html*/
                     document.getElementById("codeDMARC").value="txt= "+dmarc;
+                    score++;
                     /*Decomposition et explication detaillee sur la valeur de l'enregistrement dmarc*/
                     dmarc=dmarc.split(";");
                     for(var i=0;i<dmarc.length;i++){
@@ -196,7 +210,8 @@ function handleResponse(){
                      else if(dmarc[i].includes("ri=")){
                         document.getElementById("recordDmarc").innerHTML+="<br/><br/><span>Interval de temps "+dmarc[i]+"</span>: Cette balise ri indique l'intervalle de temps en secondes entre deux rapports agrégés consécutifs envoyés par l'organisme de rapport au propriétaire du domaine.";
                      }
-                  }    
+                  } 
+                    document.getElementById("codeDMARC").style.color="black";   
                     document.getElementById("col11").style.backgroundColor = "green";
                     document.getElementById("col12").style.backgroundColor = "rgb(250, 250, 254)";
                     document.getElementById("iconSVGDmarc").style.color="green";
@@ -229,6 +244,7 @@ function handleResponse(){
                    /*Action a realiser si le nom de domaine est valide et dispose d'un enregistrement spf, 
                      on recupere la valeur et on envoie sur la page html*/
                     document.querySelector("#codeSPF").value="txt= "+spf;
+                    score++;
                   /*Decomposition et explication detaillee sur la valeur de l'enregistrement spf*/
                     spf=spf.split(" ");
                     for(var i=0; i<spf.length;i++){
@@ -269,6 +285,7 @@ function handleResponse(){
                         document.querySelector("#recordSpf").innerHTML+="<br/><br/><span>"+spf[i]+":</span> "+def;
                        }                      
                     }
+                    document.querySelector("#codeSPF").style.color="black";
                     document.getElementById("col21").style.backgroundColor = "green";
                     document.getElementById("col22").style.backgroundColor = "rgb(250, 250, 254)";
                     document.getElementById("iconSVGSpf").style.color="green";
@@ -284,6 +301,7 @@ function handleResponse(){
                   }
                   /*Récupération de l'enrégistrement DKIM si le domaine en dispose*/
                   if(dkim!=="Not Found"){
+                     score++;
                     document.getElementById("codeDKIM").value=dkim;
                     document.getElementById("codeDKIM").style.color="black";
                     document.getElementById("codeDKIM").style.height="auto";
@@ -316,10 +334,12 @@ function handleResponse(){
                     document.getElementById("col31").style.backgroundColor="rgb(250, 250, 254)";
                     document.getElementById("col32").style.backgroundColor="red";
                     document.getElementById("iconSVGDkim").style.color="red";
+                    document.getElementById("recordDKIM").innerHTML="";
 
                   }
                   /*Récupération de la valeur SSL du protocole HTTPS*/
                   if(ssl!="Not found"){
+                     score++;
                     indexssl=ssl.lastIndexOf('CERTIFICATE');
                     ssl=ssl.substr(0,indexssl+16);
                     document.getElementById("codeHTTPS").value=ssl;
@@ -463,9 +483,54 @@ function handleResponse(){
                   document.getElementById("codeHTTPS").style.fontSize="20px";
                   document.getElementById("codeHTTPS").style.paddingTop="";
                   document.getElementById("codeHTTPS").style.height="50px";
-                  document.getElementById("recordHttps").innerHtml=" ";
-               }   
-               
+                  document.getElementById("recordHttps").innerHTML="";
+               }
+               if(score===4){
+                  document.getElementById("button1").style.backgroundColor="green";
+                  document.getElementById("button2").style.backgroundColor="green";
+                  document.getElementById("button3").style.backgroundColor="green";
+                  document.getElementById("button4").style.backgroundColor="green";
+                  document.getElementById("score").innerHTML="10/10";
+                  document.getElementById("score").style.color="green";
+                  document.getElementById("score").style.fontSize="50px"
+                  }
+               else if(score===3){
+                  document.getElementById("button1").style.backgroundColor="green";
+                  document.getElementById("button2").style.backgroundColor="green";
+                  document.getElementById("button3").style.backgroundColor="green";
+                  document.getElementById("button4").style.backgroundColor="rgb(250, 250, 254)";
+                  document.getElementById("score").innerHTML="7.5/10";
+                  document.getElementById("score").style.color="green";
+                  document.getElementById("score").style.fontSize="50px"
+               } 
+               else if(score===2){
+                  document.getElementById("button1").style.backgroundColor="rgb(27,238,68)";
+                  document.getElementById("button2").style.backgroundColor="rgb(27,238,68)";
+                  document.getElementById("button3").style.backgroundColor="rgb(250, 250, 254)";
+                  document.getElementById("button4").style.backgroundColor="rgb(250, 250, 254)";
+                  document.getElementById("score").innerHTML="5/10";
+                  document.getElementById("score").style.color="rgb(27,238,68)";
+                  document.getElementById("score").style.fontSize="50px"
+               }
+               else if(score===1){
+                  document.getElementById("button1").style.backgroundColor="red";
+                  document.getElementById("button2").style.backgroundColor="rgb(250, 250, 254)";
+                  document.getElementById("button3").style.backgroundColor="rgb(250, 250, 254)";
+                  document.getElementById("button4").style.backgroundColor="rgb(250, 250, 254)";
+                  document.getElementById("score").innerHTML="2.5/10";
+                  document.getElementById("score").style.color="red";
+                  document.getElementById("score").style.fontSize="50px"
+               }
+               else if(score===0){
+                  document.getElementById("button1").style.backgroundColor="rgb(250, 250, 254)";
+                  document.getElementById("button2").style.backgroundColor="rgb(250, 250, 254)";
+                  document.getElementById("button3").style.backgroundColor="rgb(250, 250, 254)";
+                  document.getElementById("button4").style.backgroundColor="rgb(250, 250, 254)";
+                  document.getElementById("score").innerHTML="00/10";
+                  document.getElementById("score").style.color="red";
+                  document.getElementById("score").style.fontSize="50px"
+               }    
+                    
              }     
          }
    }
