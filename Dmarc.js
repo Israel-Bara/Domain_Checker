@@ -1,3 +1,4 @@
+
 /*Fonction de création de l'objet XMLHttpRequest en fonction de la version des navigateurs*/
 function getXMLHttpRequest() {
 	var xhr = null;
@@ -45,6 +46,12 @@ else{
    setTimeout('process()',1000);
 }
 }
+const touch=document.querySelector("#domainNAme");
+touch.addEventListener('keydown',function(event){
+if(event.key==='Enter'){
+   process(event);
+}
+});
 
 /*Definition de la fonction de recuperation de donnees du serveur*/
 function handleResponse(){
@@ -98,6 +105,7 @@ function handleResponse(){
             document.getElementById("button2").style.backgroundColor="rgb(250, 250, 254)";
             document.getElementById("button3").style.backgroundColor="rgb(250, 250, 254)";
             document.getElementById("button4").style.backgroundColor="rgb(250, 250, 254)";
+            document.getElementById("score").innerHTML="";
          }
          else{
             /*Recuperation des enregistrement dmarc, spf,dkim et le dns dans des variable*/
@@ -143,6 +151,7 @@ function handleResponse(){
                 document.getElementById("button2").style.backgroundColor="rgb(250, 250, 254)";
                 document.getElementById("button3").style.backgroundColor="rgb(250, 250, 254)";
                 document.getElementById("button4").style.backgroundColor="rgb(250, 250, 254)";
+                document.getElementById("score").innerHTML="";
                }
              else{
                /*Si le nom de domaine est valide, algorithme pour recuperer la valeur des enregistrements
@@ -500,12 +509,12 @@ function handleResponse(){
                   document.getElementById("score").style.fontSize="50px"
                } 
                else if(score===2){
-                  document.getElementById("button1").style.backgroundColor="rgb(27,238,68)";
-                  document.getElementById("button2").style.backgroundColor="rgb(27,238,68)";
+                  document.getElementById("button1").style.backgroundColor="rgb(255,165,0)";
+                  document.getElementById("button2").style.backgroundColor="rgb(255,165,0)";
                   document.getElementById("button3").style.backgroundColor="rgb(250, 250, 254)";
                   document.getElementById("button4").style.backgroundColor="rgb(250, 250, 254)";
                   document.getElementById("score").innerHTML="5/10";
-                  document.getElementById("score").style.color="rgb(27,238,68)";
+                  document.getElementById("score").style.color="rgb(255,165,0)";
                   document.getElementById("score").style.fontSize="50px"
                }
                else if(score===1){
@@ -531,4 +540,5 @@ function handleResponse(){
          }
    }
 }
+
 
