@@ -18,16 +18,16 @@ NB : Si ces quatre (04) protocoles sont bien définis, votre domaine a une prote
  Domain checker est une plateforme relativement simple d’utilisation. Il est constitué d’une seule page et qui interagit avec vous de façon dynamique.
 Sur cette page un espace dénommé Domain vous est présenté. A cet endroit nous vous invitons à entrer un nom de domaine. Cela fait, un bouton nommé scan vous permet d’envoyer votre nom de domaine pour être analysé suivant les protocoles ci-dessus cités.
 Un serveur se charge en arrière-plan de scanner le nom de domaine entré et retourner les résultats sur la page.
-Le serveur vérifie en un premier la validité du nom de domaine. Si celui-ci n’est pas valide, le serveur retourne un message disant que le nom de domaine entré n’est pas valide. Si valide, le serveur procède à la rechercher des enregistrements Dmarc, Spf et Dkim. 
+Le serveur vérifie en un premier la validité du nom de domaine. Si celui-ci n’est pas valide, le serveur retourne un message disant que le nom de domaine entré n’est pas valide. Si valide, le serveur procède à la rechercher des enregistrements Dmarc, Spf, Dkim et SSL. 
 A la fin de l’analyse, les résultats sont renvoyés automatiquement sur la page dans deux sections:
 - La première section affiche les résultats partiels en montrant que le domaine possède ou non les différents enregistrements demandés. Et cela se traduit par la présence de deux sortes de voyant, rouge ou vert.
 Le voyant rouge symbolise l’absence de l’enregistrement.
 Le voyant vert symbolise l’existence de l’enregistrement.
-Chaque enregistrement est représenté sur une colonne. Une quatrième colonne présente une note globale sur dix (10), révélant ainsi le niveau de protection pour le domaine en question.
+Chaque enregistrement est représenté sur une colonne. Une cinquième colonne présente une note globale sur dix (10), révélant ainsi le niveau de protection pour le domaine en question. Une note inférieur ou égal à 2.5/10 indique que votre domaine est vulnerable et qu'il faut urgemment définir les protocoles de sécurité. Une note égale à 5/10 indique que le domaine a une sécurité moyenne. Pour finir une note supérieure ou égale à 7.5/10 indique une protection optimum pour le domaine.
 - La deuxième section affiche les résultats détaillés pour le domaine. A ce niveau, chaque protocole est représenté sur une ligne. Si la valeur de l’enregistrement est trouvée, celle-ci est affichée avec les détails sur les différentes balises qu’elle comporte. Si l’enregistrement en question n’est pas défini sur le domaine, un message est par conséquente affiché à l’emplacement réservé pour contenir la valeur de l’enregistrement.
 
 ### III)  Les limites
-Domain Checker est une plateforme fiable, mais elle rencontre un problème avec l’affichage détaillée de l’enregistrement SPF de google.com et Yahoo.com. Nonobstant cela, Domain Checker informe si ces deux domaines disposent ou non des enregistrements DMARC, SPF et DKIM. Leurs valeurs respectives sont également affichées, mais sans les détails sur les différentes balises composites.
+Domain Checker est une plateforme fiable, mais elle rencontre un problème avec l’affichage détaillée de l’enregistrement SPF de google.com et Yahoo.com. Nonobstant cela, Domain Checker informe si ces deux domaines disposent ou non des enregistrements DMARC, SPF, HTTPS et DKIM. Leurs valeurs respectives sont également affichées. Les domaines dont le selecteur est différent de google,default et iport, Domain Checker ne parvient pas à retouver les enregistrements DKIM. Des perspectives restent à réaliser à ce niveau.
 
 ### Conclusion
 Domain Checker est une bonne plateforme pour faire un diagnostic sur les noms de domaines afin de visualiser les politiques essentielles de protection qui y sont définis. Cela permettra donc de mettre en place les mesures de sécurité sur un domaine si toutefois le diagnostic révèle une protection non optimale.
