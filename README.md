@@ -1,6 +1,6 @@
 ## Domain Checker
 
-Domain Checker est une plateforme web permettant de vérifier la protection des noms de domaines suivant certains protocoles. Il existe plusieurs protocoles, mais cette plateforme s’intéresse aux plus importants que sont le DMARC, le SPF et le DKIM.
+Domain Checker est une plateforme web permettant de vérifier la protection des noms de domaines suivant certains protocoles. Il existe plusieurs protocoles, mais cette plateforme s’intéresse aux plus importants que sont le DMARC, le SPF,le DKIM et le HTTPS.
 
 ### I)	Définition des protocoles
 
@@ -10,7 +10,9 @@ Le protocole SPF permet de certifier que l'IP émettrice a bien le droit d’uti
 Le protocole DKIM est un protocole cryptographique se basant sur l'utilisation de clés publiques qui sont publiés dans vos DNS. Le protocole permet de signer votre email avec votre nom de domaine, comme vous pourriez signer une lettre avec votre signature. Le destinataire de votre email est sûr que l'email qu'il a reçu a bien été écrit par vous et n'a pas été altéré durant sa transmission. Ce protocole est particulièrement efficace contre des attaques type "man in the middle"(homme au milieu).
 #### 3.	Le protocole DMARC (Domain-based Message Authentication, Reporting and Conformance)
  Les deux protocoles DKIM et SPF sont complémentaires et répondent à des types d'attaque différentes. Néanmoins ils ont l'inconvénient de ne pas donner de conduite à tenir en cas d'attaque. Le protocole DMARC pallie ce manque et donne des indications en cas d'attaque : il est en particulier possible d'être averti si quelqu'un usurpe votre identité (si l'attaqueur utilise une IP non autorisée ou si l'attaqueur a modifié le contenu de votre email par exemple). Ce protocole permet d’indiquer au serveur de messagerie du destinataire, la politique à tenir lorsqu’un email ne satisfait pas aux politiques spf et dkim.
-NB : Si ces trois (03) protocoles sont bien définis, votre domaine a une protection optimale.
+ #### 4. Le protocole HTTPS (HyperText Transfert Protocol Secure)
+ L'https, désigne la version sécurisée du langage informatique http, un protocole de communication qui permet la liaison entre un client et un serveur pour le World Wide Web (www). En français, le terme se traduit par protocole de transfert hypertexte sécurisé. Il s'agit en réalité de la combinaison entre le langage http et un protocole (SSL ou TLS) de sécurisation des échanges sur le Web. Cette combinaison consiste à protéger l'authentification d'un serveur, la confidentialité et l'intégrité des données échangées et, parfois, l'authentification du client.
+NB : Si ces quatre (04) protocoles sont bien définis, votre domaine a une protection optimale.
  
  ### II)	Guide d’utilisation de la plateforme
  Domain checker est une plateforme relativement simple d’utilisation. Il est constitué d’une seule page et qui interagit avec vous de façon dynamique.
